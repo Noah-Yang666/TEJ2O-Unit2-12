@@ -30,7 +30,7 @@ input.onButtonPressed(Button.A, function () {
     basic.showNumber(distanceToObject)
     basic.showString('cm')
     if (distanceToObject < 10) {
-        // if distance is less than to 10 cm
+        // if distance is less than 10 cm
         basic.showIcon(IconNames.No)
         neopixelStrip.setPixelColor(0, neopixel.colors(NeoPixelColors.Red))
         neopixelStrip.setPixelColor(1, neopixel.colors(NeoPixelColors.Red))
@@ -54,5 +54,13 @@ input.onButtonPressed(Button.A, function () {
     neopixelStrip.setPixelColor(2, neopixel.colors(NeoPixelColors.Black))
     neopixelStrip.setPixelColor(3, neopixel.colors(NeoPixelColors.Black))
     neopixelStrip.show()
+    basic.showIcon(IconNames.Happy)
+})
+
+// pressing Button B
+input.onButtonPressed(Button.B, function () {
+    neopixelStrip.clear()
+    neopixelStrip.show()
+    basic.clearScreen()
     basic.showIcon(IconNames.Happy)
 })
