@@ -6,7 +6,9 @@ This module is a Micro:bit MicroPython program that lights up different neopixel
 
 from microbit import *
 
+
 import neopixel
+
 
 class HCSR04:
 
@@ -18,6 +20,7 @@ class HCSR04:
         self.trigger_pin = tpin
         self.echo_pin = epin
         self.sclk_pin = spin
+
     def distance_mm(self):
         spi.init(
             baudrate=125000,
@@ -53,12 +56,14 @@ class HCSR04:
         dist = -1 if i < 0 else round(((pre + (k - i) * 8.0 + post) * 8 * 0.172) / 2)
         return dist
 
+
 # setting up
 sonar = HCSR04()
 myNeopixelStrip = neopixel.NeoPixel(pin16, 4)
 myNeopixelStrip.clear()
 myNeopixelStrip.show()
 display.show(Image.HAPPY)
+
 
 # displaying distance and pressing A
 while True:
@@ -68,14 +73,14 @@ while True:
         display.show(Image.HAPPY)
 
         # if distance is less than 10 cm
-        if sonar.distance_mm() / 10 < 10:
+        if sonar.distance_mm() < 10:
             display.show(Image.NO)
             myNeopixelStrip[0] = (255, 0, 0)
             myNeopixelStrip[1] = (255, 0, 0)
             myNeopixelStrip[2] = (255, 0, 0)
             myNeopixelStrip[3] = (255, 0, 0)
 
-        # if not
+        # if more
         else:
             display.show(Image.YES)
             myNeopixelStrip[0] = (0, 255, 0)
