@@ -57,44 +57,40 @@ class HCSR04:
         return dist
 
 
-# setting up
+# startup
 sonar = HCSR04()
+display.show(Image.HAPPY)
 myNeopixelStrip = neopixel.NeoPixel(pin16, 4)
 myNeopixelStrip.clear()
 myNeopixelStrip.show()
-display.show(Image.HAPPY)
 
-
-# displaying distance and pressing A
+# display distance
 while True:
     if button_a.was_pressed():
         display.scroll(sonar.distance_mm() / 10)
         display.scroll(" cm")
         display.show(Image.HAPPY)
 
-        # if distance is less than 10 cm
-        if sonar.distance_mm() < 10:
-            display.show(Image.NO)
+        # is it greater than 10
+        if sonar.distance_mm() / 10 < 10:
             myNeopixelStrip[0] = (255, 0, 0)
             myNeopixelStrip[1] = (255, 0, 0)
             myNeopixelStrip[2] = (255, 0, 0)
             myNeopixelStrip[3] = (255, 0, 0)
 
-        # if more
+        # if not
         else:
-            display.show(Image.YES)
             myNeopixelStrip[0] = (0, 255, 0)
             myNeopixelStrip[1] = (0, 255, 0)
             myNeopixelStrip[2] = (0, 255, 0)
             myNeopixelStrip[3] = (0, 255, 0)
 
-        # showing neopixels
+        # show neopixels
         myNeopixelStrip.show()
-        display.show(Image.HAPPY)
+        display.show(Image.YES)
 
-        # resetting program
-        sleep(2000)
+        # reset
+        sleep(5000)
         myNeopixelStrip.clear()
         myNeopixelStrip.show()
-        display.clear()
         display.show(Image.HAPPY)
